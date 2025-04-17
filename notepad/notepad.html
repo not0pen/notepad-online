@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Notepad Online</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f7f7f7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    textarea {
+      width: 100%;
+      max-width: 800px;
+      height: 400px;
+      padding: 15px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      resize: none;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #ff4d4d;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #e60000;
+    }
+  </style>
+</head>
+<body>
+  <h1>📝 Notepad Online</h1>
+  <textarea id="note" placeholder="Tulis catatan di sini..."></textarea>
+  <button onclick="clearNote()">🗑 Hapus Catatan</button>
+
+  <script>
+    const textarea = document.getElementById('note');
+
+    // Muat catatan dari localStorage saat pertama dibuka
+    textarea.value = localStorage.getItem('catatan') || '';
+
+    // Simpan otomatis saat mengetik
+    textarea.addEventListener('input', () => {
+      localStorage.setItem('catatan', textarea.value);
+    });
+
+    // Fungsi hapus catatan
+    function clearNote() {
+      if (confirm('Yakin ingin menghapus catatan?')) {
+        localStorage.removeItem('catatan');
+        textarea.value = '';
+      }
+    }
+  </script>
+</body>
+</html>
